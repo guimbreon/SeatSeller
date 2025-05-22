@@ -34,16 +34,38 @@ public class Configuration {
 		}
 	}
 	
+	
+	/**
+    * Retorna true se a propriedade "cativar" estiver definida como "true".
+    */
 	public boolean cativarDuranteReservas() {
-		// TO DO
+		String valor = prop.getProperty("cativar");
+        return valor != null && valor.equalsIgnoreCase("true");
 	}
 	
+	/**
+    * Retorna o valor da propriedade "retirar" como double.
+    * Caso não esteja definido, retorna 1.0 por omissão.
+    */
 	public double valorDuranteReservas() {
-		// TO DO
+		String valor = prop.getProperty("retirar");
+        if (valor == null) return 1.0;
+        try {
+            return Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.CONFIG, "Invalid 'retirar' value in config.properties", e);
+            return 1.0;
+        }
 	}
-
+	
+	
+	/**
+	* Devolve o valor de qualquer propriedade pelo nome.
+	* @param key nome da propriedade
+	* @return valor da propriedade, ou null se não estiver definida
+	*/
 	public String valorPropriedade(String key) {
-		// TO DO
+		return prop.getProperty(key);
  	}
 	
 }
