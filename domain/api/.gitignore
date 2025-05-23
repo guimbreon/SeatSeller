@@ -1,0 +1,10 @@
+/IAssociarGrelhaHandler.class
+/IConcluirReservaHandler.class
+/ICriarGrelhaHandler.class
+/ICriarTipoDeLugarHandler.class
+/IDesassociarGrelhaHandler.class
+/INotificacaoReceiver.class
+/IRegistarUtilizadorHandler.class
+/IReservarLugarHandler.class
+/ISeatSeller.class
+/ISessao.class
