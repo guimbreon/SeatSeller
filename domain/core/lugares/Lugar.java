@@ -22,10 +22,9 @@ public class Lugar {
 
     @Override
     public String toString() {
-        return String.format("Lugar [%d,%d] - Tipo: %s, Preço: %.2f€", linha, coluna, getPreco(), getDesignacaoTipo());
+        return String.format("[%d,%d] - Tipo: %s, Preço: %.2f€", linha, coluna, getPreco(), getDesignacaoTipo());
     }
 
-    // Getters
     public int getLinha() {
         return linha;
     }
@@ -35,15 +34,18 @@ public class Lugar {
     }
     
     public double getPreco() {
-        
+    	if (grelha == null || tipo == null) {
+    	    return 0.0;
+    	}
+    	return grelha.getIndice() * tipo.getPreco();
     }
 
     public String getDesignacaoTipo() {
-
+    	return (tipo != null) ? tipo.getDesig() : "Sem tipo";
     }
     
     public void definirTipo(Optional<TipoDeLugar> tp) {
-    	
+        tp.ifPresent(t -> this.tipo = t);
     }
 
     public boolean disponivel(String data, String hora) {
