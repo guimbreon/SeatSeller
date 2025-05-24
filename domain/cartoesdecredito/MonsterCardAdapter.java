@@ -21,8 +21,7 @@ public class MonsterCardAdapter implements ISistemaDeCartoesDeCreditoAdapter {
 		String mesStr = String.format("%02d", mes);
 		String anoStr = String.format("%02d", ano); // 4digitos
 		Card card = new Card(num, String.valueOf(ccv), mesStr, anoStr);
-		if (!api.isValid(card)) return false;
-
+		
 		api.block(card, qt);
 		return true;
 	}
@@ -32,8 +31,7 @@ public class MonsterCardAdapter implements ISistemaDeCartoesDeCreditoAdapter {
 		String mesStr = String.format("%02d", mes);
 		String anoStr = String.format("%02d", ano); // 4digitos
 		Card card = new Card(num, String.valueOf(ccv), mesStr, anoStr);
-		if (!api.isValid(card)) return false;
-
+		
 		api.charge(card, qt);
 		return true;
 	}
