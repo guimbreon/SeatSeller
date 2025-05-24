@@ -26,16 +26,17 @@ public class Grelha {
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
-    }//é preciso?
+    }
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         support.removePropertyChangeListener(listener);
-    }//é preciso??
+    }
+    
     
     public void notificar(Lugar lug) {
-    	Map<String, Object> info = new HashMap<>();
-        info.put("grelha", this);
-        info.put("lugar", lug);
+    	Map<String, Object> info = new HashMap<String, Object>();
+        info.put("grelha", getDesignacao());
+        info.put("lugar", lug.toString());
         support.firePropertyChange("reservaConfirmada", null, lug);
     }
     
@@ -56,7 +57,7 @@ public class Grelha {
                       .filter(l -> l.getLinha() == linha && l.getColuna() == coluna)
                       .findFirst();
     }
-    //ver os sets que é preciso  
+ 
     
     public List<Combinacao> getCombinacoes(String data, String hora) {
         combinacoes = new ArrayList<Combinacao>();  // lista onde vamos acumular as combinações
@@ -100,18 +101,27 @@ public class Grelha {
                 lugares.add(l);
             }
         }
-
     }
     
     public Lugar getDisponivel(Optional<TipoDeLugar> t, String data, String hora) {
-        	
+    	EncontrarLugarStrategy strat = EncontrarLugarStrategyFactory.getEncontrarLugarStrategy();
+        return strat.getLugar(this, t, data, hora);	
     }
     
     public boolean coordenadasValidas(double i, double j) {
-    	
+    	return lugares.stream()
+                .anyMatch(l -> l.getLinha() == (int)i && l.getColuna() == (int)j);
     }
     
-    public void defineTipoLugar(double i, double j, Optional<TipoDeLugar> tp) {
-    	
+    public void defineTipoLugar(int i, int j, Optional<TipoDeLugar> tp) {
+    	lugares.stream()
+        .filter(lugar -> lugar.getLinha() == i && lugar.getColuna() == j)
+        .findFirst()
+        .ifPresent(lugar -> lugar.definirTipo(tp));
+    }
+    
+    public void defineTipoLugarPadrao( Optional<TipoDeLugar> tp) {
+    	lugares.stream()
+        .forEach(lugar -> lugar.definirTipo(tp));
     }
 }
