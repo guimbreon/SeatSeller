@@ -6,8 +6,6 @@ import domain.core.utilizadores.ClienteFinal;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Reserva {
     private int codigo;
@@ -16,12 +14,10 @@ public class Reserva {
     private List<Pagamento> pagamentos;
     private LinhaReserva linhaCorrente;
 
-    public Reserva(int id, LocalDate data, LocalTime hora){
+    public Reserva(){
         this.linhasReserva = new ArrayList<>();
         this.pagamentos = new ArrayList<>();
     }
-    
-    
     
     public int getCodigo(){
         return codigo;
@@ -39,13 +35,13 @@ public class Reserva {
         return pagamentos;
     }
     
-    public LocalDate getDataCorrente() {
+    public String getDataCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
     	return linhaCorrente.getData(); // ainda por definir na linhareserva
     }
     
-    public LocalTime getHoraCorrente() {
+    public String getHoraCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
     	return linhaCorrente.getHora(); // ainda por definir na linhareserva
@@ -87,6 +83,7 @@ public class Reserva {
     	}
     }
 
+    
     
 
     public void registarPagamento(Pagamento pg){
