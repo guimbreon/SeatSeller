@@ -1,3 +1,8 @@
 /CriarTipoDeLugarHandler.class
 /RegistarUtilizadorHandler.class
 /Sessao.class
+/CriarGrelhaHandler.class
+/ReservarLugarHandler.class
+/DesassociarGrelhaHandler.class
+/ConcluirReservaHandler.class
+/AssociarGrelhaHandler.class
