@@ -91,9 +91,7 @@ public class Grelha {
         return null;
     }
     
-    
     public void criaLugares(double alt, double larg, Optional<TipoDeLugar> padr) {
-
         for (int i = 1; i <= alt; i++) {
             for (int j = 1; j <= larg; j++) {
                 TipoDeLugar tipo = padr.isPresent() ? padr.get() : null;
