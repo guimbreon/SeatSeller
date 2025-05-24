@@ -45,6 +45,42 @@ public class Sessao implements ISessao {
 	public boolean isFuncionario() {
 		return utilizador instanceof Funcionario;
 	}
+
+	@Override
+	public ICriarTipoDeLugarHandler getCriarTipoDeLugarHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ICriarGrelhaHandler getCriarGrelhaHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IReservarLugarHandler getReservarLugarHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IConcluirReservaHandler getConcluirReservaHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IAssociarGrelhaHandler getAssociarGrelhaHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IDesassociarGrelhaHandler getDesassociarGrelhaHandler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	// Mais metodos
 

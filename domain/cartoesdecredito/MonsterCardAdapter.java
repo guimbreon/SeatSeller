@@ -1,6 +1,7 @@
 package domain.cartoesdecredito;
 
 import monstercard.Card;
+
 import monstercard.MonsterCardAPI;
 
 public class MonsterCardAdapter implements ISistemaDeCartoesDeCreditoAdapter {
