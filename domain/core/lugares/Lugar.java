@@ -49,6 +49,6 @@ public class Lugar {
     }
 
     public boolean disponivel(String data, String hora) {
-    	
+    	//fazer quando Reserva feita
     }
 }
