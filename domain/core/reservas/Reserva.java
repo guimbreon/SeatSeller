@@ -17,7 +17,9 @@ public class Reserva {
         this.linhasReserva = new ArrayList<>();
         this.pagamentos = new ArrayList<>();
     }
-
+    
+    
+    
     public int getCodigo(){
         return codigo;
     }

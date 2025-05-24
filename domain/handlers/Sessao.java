@@ -29,7 +29,14 @@ public class Sessao implements ISessao {
 	private ISistemaDeCartoesDeCreditoAdapter creditCardSystem = 
 			SistemaDeCartoesDeCreditoAdapterFactory.getInstance().getSistemaDeCartoesDeCreditoAdapter();
 
-	// Construtor
+	public Sessao(Utilizador utilizador, CatalogoReservas catReservas, CatalogoUtilizadores catUtilizadores,
+            CatalogoTiposDeLugar catTipos, CatalogoGrelhas catGrelhas) {
+			  this.utilizador = utilizador;
+			  this.catReservas = catReservas;
+			  this.catUtilizadores = catUtilizadores;
+			  this.catTipos = catTipos;
+			  this.catGrelhas = catGrelhas;
+			}
 
 	@Override
 	public boolean isClienteFinal() {
