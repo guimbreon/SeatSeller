@@ -3,6 +3,7 @@ package domain.handlers;
 import domain.api.IDesassociarGrelhaHandler;
 import domain.api.INotificacaoReceiver;
 import domain.core.lugares.CatalogoGrelhas;
+import domain.core.lugares.Grelha;
 import domain.core.utilizadores.Utilizador;
 
 public class DesassociarGrelhaHandler implements IDesassociarGrelhaHandler {
@@ -18,8 +19,9 @@ public class DesassociarGrelhaHandler implements IDesassociarGrelhaHandler {
 
 	@Override
 	public void desassociarGrelha(String desig, INotificacaoReceiver c) {
-		// TODO Auto-generated method stub
+		Grelha g = this.catGrelhas.getGrelha(desig);
 
+		utilizador.desassociarGrelha(g, c);
 	}
 
 }
