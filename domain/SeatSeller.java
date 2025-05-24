@@ -22,9 +22,7 @@ public class SeatSeller implements ISeatSeller {
     private CatalogoTiposDeLugar catTipos = new CatalogoTiposDeLugar();
     private CatalogoGrelhas catGrelhas = new CatalogoGrelhas();
     
-    private ISistemaDeCartoesDeCreditoAdapter creditCardSystem =
-            SistemaDeCartoesDeCreditoAdapterFactory.getInstance().getSistemaDeCartoesDeCreditoAdapter();
-	
+
 	@Override
 	public IRegistarUtilizadorHandler getRegistarUtilizadorHandler() {
 		return new RegistarUtilizadorHandler(catUtilizadores);
@@ -38,7 +36,7 @@ public class SeatSeller implements ISeatSeller {
 		Utilizador utilizador = catUtilizadores.getUtilizador(u);
         if (utilizador == null) return Optional.empty();
 		
-		return Optional.of(new Sessao(utilizador, catReservas, catUtilizadores, catTipos, catGrelhas, creditCardSystem));
+		return Optional.of(new Sessao(utilizador, catReservas, catUtilizadores, catTipos, catGrelhas));
 	}
 
 }
