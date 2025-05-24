@@ -3,6 +3,7 @@ package domain.handlers;
 import domain.api.IAssociarGrelhaHandler;
 import domain.api.INotificacaoReceiver;
 import domain.core.lugares.CatalogoGrelhas;
+import domain.core.lugares.Grelha;
 import domain.core.utilizadores.Utilizador;
 
 public class AssociarGrelhaHandler implements IAssociarGrelhaHandler {
@@ -18,8 +19,9 @@ public class AssociarGrelhaHandler implements IAssociarGrelhaHandler {
 
 	@Override
 	public void associarGrelha(String desig, INotificacaoReceiver c) {
-		// TODO Auto-generated method stub
-
+		Grelha g = this.catGrelhas.getGrelha(desig);
+		
+		utilizador.associarGrelha(g, c);
 	}
 
 }
