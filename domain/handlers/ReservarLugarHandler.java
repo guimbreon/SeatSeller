@@ -7,8 +7,32 @@ import domain.api.IReservarLugarHandler;
 import domain.api.exceptions.DoesNotExistException;
 import domain.api.exceptions.InvalidCreditCardException;
 import domain.api.wrappers.Combinacao;
+import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
+import domain.core.lugares.CatalogoGrelhas;
+import domain.core.lugares.CatalogoTiposDeLugar;
+import domain.core.reservas.CatalogoReservas;
+import domain.core.utilizadores.CatalogoUtilizadores;
+import domain.core.utilizadores.Utilizador;
 
 public class ReservarLugarHandler implements IReservarLugarHandler {
+
+    private Utilizador utilizador;
+    private CatalogoGrelhas catGrelhas;
+    private CatalogoTiposDeLugar catTipos;
+    private CatalogoReservas catReservas;
+    private CatalogoUtilizadores catUtilizadores;
+    private ISistemaDeCartoesDeCreditoAdapter creditCardSystem;
+
+    public ReservarLugarHandler(Utilizador utilizador, CatalogoGrelhas catGrelhas, CatalogoTiposDeLugar catTipos,
+            CatalogoReservas catReservas, CatalogoUtilizadores catUtilizadores,
+            ISistemaDeCartoesDeCreditoAdapter creditCardSystem) {
+        this.utilizador = utilizador;
+        this.catGrelhas = catGrelhas;
+        this.catTipos = catTipos;
+        this.catReservas = catReservas;
+        this.catUtilizadores = catUtilizadores;
+        this.creditCardSystem = creditCardSystem;
+    }
 
 	@Override
 	public void indicarCliente(String nCli) throws DoesNotExistException {

@@ -55,38 +55,32 @@ public class Sessao implements ISessao {
 
 	@Override
 	public ICriarTipoDeLugarHandler getCriarTipoDeLugarHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new CriarTipoDeLugarHandler(catTipos);
 	}
-
+	
 	@Override
 	public ICriarGrelhaHandler getCriarGrelhaHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new CriarGrelhaHandler(catGrelhas, catTipos);
 	}
-
+	
 	@Override
 	public IReservarLugarHandler getReservarLugarHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new ReservarLugarHandler(utilizador,catGrelhas,catTipos,catReservas,catUtilizadores,creditCardSystem);
 	}
-
+	
 	@Override
 	public IConcluirReservaHandler getConcluirReservaHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new ConcluirReservaHandler(utilizador, catReservas, creditCardSystem);
 	}
-
+	
 	@Override
 	public IAssociarGrelhaHandler getAssociarGrelhaHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new AssociarGrelhaHandler(utilizador, catGrelhas);
 	}
-
+	
 	@Override
 	public IDesassociarGrelhaHandler getDesassociarGrelhaHandler() {
-		// TODO Auto-generated method stub
-		return null;
+	    return new DesassociarGrelhaHandler(utilizador, catGrelhas);
 	}
 	
 	// Mais metodos
