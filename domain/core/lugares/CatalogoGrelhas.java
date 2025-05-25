@@ -33,4 +33,12 @@ public class CatalogoGrelhas {
 
         return comb;
     }
+    
+    public boolean existeGrelha(String desig) {
+        return grelhas.containsKey(desig);
+    }
+    
+    public void acrescentaGrelha(Grelha g) {
+        grelhas.put(g.getDesignacao(), g);
+    }
 }
