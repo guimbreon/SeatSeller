@@ -6,6 +6,8 @@ import java.util.Map;
 import domain.api.wrappers.Combinacao;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class CatalogoGrelhas {
@@ -16,12 +18,12 @@ public class CatalogoGrelhas {
         return grelhas.get(desig);
     }
 
-    public List<Combinacao> getCombinacoes() {
+    public List<Combinacao> getCombinacoes(LocalDate date, LocalTime time) {
         List<Combinacao> comb = new ArrayList<>();
 
         for (Grelha g : grelhas.values()) {
             // Assuming getCombinacoes returns a List<Combinacao> or a single Combinacao
-            List<Combinacao> c = g.getCombinacoes(null, null);  // Adjust this if it's a list
+            List<Combinacao> c = g.getCombinacoes(date, time);  // Adjust this if it's a list
             if (c != null) {
                 for (Combinacao combItem : c) {
                     comb.add(combItem);

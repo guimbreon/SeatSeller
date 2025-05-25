@@ -2,6 +2,8 @@ package domain.core.lugares;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,11 +64,11 @@ public class Grelha {
     }
  
     
-    public List<Combinacao> getCombinacoes(String data, String hora) {
+    public List<Combinacao> getCombinacoes(LocalDate date, LocalTime time) {
         combinacoes = new ArrayList<Combinacao>();  // lista onde vamos acumular as combinações
 
         lugares.stream()
-            .filter(lug -> lug.disponivel(data, hora))
+            .filter(lug -> lug.disponivel(date, time))
             .forEach(lug -> {
                 String tp = lug.getDesignacaoTipo();
 
