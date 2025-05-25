@@ -28,5 +28,17 @@ public class CartaoCredito {
 	public String getNumero() {
 		return this.numero;
 	}
+	
+    public int getCcv() {
+        return this.ccv;
+    }
+
+    public int getMesValidade() {
+        return this.mesValidade;
+    }
+
+    public int getAnoValidade() {
+        return this.anoValidade;
+    }
     
 }

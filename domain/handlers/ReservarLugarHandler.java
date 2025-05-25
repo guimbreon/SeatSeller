@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import domain.Configuration;
 import domain.api.IReservarLugarHandler;
 import domain.api.exceptions.DoesNotExistException;
 import domain.api.exceptions.InvalidCreditCardException;
@@ -12,7 +13,10 @@ import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
 import domain.core.lugares.CatalogoGrelhas;
 import domain.core.lugares.CatalogoTiposDeLugar;
 import domain.core.lugares.Grelha;
+import domain.core.lugares.Lugar;
 import domain.core.lugares.TipoDeLugar;
+import domain.core.pagamentos.CartaoCredito;
+import domain.core.pagamentos.Pagamento;
 import domain.core.reservas.CatalogoReservas;
 import domain.core.reservas.Reserva;
 import domain.core.reservas.ReservaFactory;
@@ -29,7 +33,11 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
     private CatalogoUtilizadores catUtilizadores;
     private ISistemaDeCartoesDeCreditoAdapter creditCardSystem;
     private Reserva res;
-
+    private ClienteFinal cli;
+    private double preco;
+    private CartaoCredito cc;
+    
+    
     public ReservarLugarHandler(Utilizador utilizador, CatalogoGrelhas catGrelhas, CatalogoTiposDeLugar catTipos,
             CatalogoReservas catReservas, CatalogoUtilizadores catUtilizadores,
             ISistemaDeCartoesDeCreditoAdapter creditCardSystem) {
@@ -54,8 +62,8 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 			rf.addCatReservas(catReservas);
 			this.res = rf.getProximaReserva();			
 		}
-		ClienteFinal cf = (ClienteFinal) this.utilizador;
-		res.setCliente(cf);
+		cli = (ClienteFinal) this.utilizador;
+		res.setCliente(cli);
 		res.novaLinha(date, time);
 		catGrelhas.getCombinacoes(date, time);
 		return null;
@@ -64,28 +72,58 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 	@Override
 	public String indicarCombinacao(String grelha, String tipoDeLugar) throws DoesNotExistException {
 		Grelha g = catGrelhas.getGrelha(grelha);
-		Optional<TipoDeLugar> t = catTipos.getTipo(tipoDeLugar);
+		Optional<TipoDeLugar> t = catTipos.getTipoLugar(tipoDeLugar);
 		LocalDate data = res.getDataCorrente();
-		LocalTime time = res.getHoraCorrente();
-		return null;
+		LocalTime hora = res.getHoraCorrente();
+		Optional<Lugar> lug = g.getDisponivel(t, data, hora);
+		
+		return lug.toString();
 	}
 
 	@Override
 	public void terminarLugares() {
-		// TODO Auto-generated method stub
-
+		res.finalizar();
 	}
 
 	@Override
 	public double indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
-		// TODO Auto-generated method stub
-		return 0;
+		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
+		ClienteFinal cli = res.getCliente();
+		if(b) {
+			boolean temCC = cli.temCC(num);
+			if(!temCC) {
+				cli.criaCC(num, ccv, mes, ano);
+			}
+		}
+		cc = new CartaoCredito(num, ccv, mes, ano);
+		this.preco = res.getPreco();
+		return preco;
 	}
 
 	@Override
 	public String confirmarReserva() {
-		// TODO Auto-generated method stub
-		return null;
+		Configuration conf = Configuration.getInstance();
+		boolean cativar = conf.cativarDuranteReservas();
+		double valor = conf.valorDuranteReservas();
+		Pagamento pg = new Pagamento(cativar, valor);
+		cli.registarPagamento(pg);
+		res.registarPagamento(pg);
+		cli.associarReserva(res);
+		catReservas.registrarReserva(res);
+		
+		String num = cc.getNumero();
+		int ccv = cc.getCcv();
+		int mes = cc.getMesValidade();
+		int ano = cc.getAnoValidade();
+		
+		if(cativar) {
+			creditCardSystem.cativar(num, ccv, mes, ano, ano);
+		}else {
+			creditCardSystem.retirar(num, ccv, mes, ano, ano);
+		}
+		
+		res.notificarGrelhas();
+		return res.getCodigo();
 	}
 
 }

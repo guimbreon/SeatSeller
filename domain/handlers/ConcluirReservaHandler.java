@@ -42,7 +42,7 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
 				cli.criaCC(num, ccv, mes, ano);
 			}
 		}
-		Pagamento pg = new Pagamento("false", valorFalta);
+		Pagamento pg = new Pagamento(false, valorFalta);
 		cli.registarPagamento(pg);
 		creditCardSystem.retirar(num, ccv, mes, ano, ano);
 	}

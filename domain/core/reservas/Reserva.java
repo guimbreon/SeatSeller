@@ -38,13 +38,13 @@ public class Reserva {
         return pagamentos;
     }
     
-    public String getDataCorrente() {
+    public LocalDate getDataCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
     	return linhaCorrente.getDate(); // ainda por definir na linhareserva
     }
     
-    public String getHoraCorrente() {
+    public LocalTime getHoraCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
     	return linhaCorrente.getTime(); // ainda por definir na linhareserva

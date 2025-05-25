@@ -10,5 +10,5 @@ import domain.core.lugares.TipoDeLugar;
 
 public interface IEncontrarLugarStrategy {
 	
-    Optional<Lugar> getLugar(Grelha grelha, TipoDeLugar tipo, LocalDate data, LocalTime hora);
+    Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> t, LocalDate data, LocalTime hora);
 }

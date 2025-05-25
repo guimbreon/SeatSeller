@@ -22,7 +22,7 @@ public class ReservaFactory {
     public Reserva getProximaReserva() {
         String codigo = novoCodigo();
         Reserva reserva = new Reserva(codigo); 
-        catReservas.adicionarReserva(reserva);
+        catReservas.registrarReserva(reserva);
         return reserva;
     }
 

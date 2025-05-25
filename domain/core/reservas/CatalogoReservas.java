@@ -11,7 +11,7 @@ public class CatalogoReservas {
         this.reservas = new HashMap<>();
     }
 
-    public void adicionarReserva(Reserva reserva) {
+    public void registrarReserva(Reserva reserva) {
         reservas.put(reserva.getCodigo(), reserva);
     }
 
