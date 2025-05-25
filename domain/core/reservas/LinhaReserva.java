@@ -1,10 +1,13 @@
 package domain.core.reservas;
 
+import domain.core.lugares.Lugar;
+
 public class LinhaReserva {
 
 
 	private String data;
 	private String hora;
+	private Lugar lugar;
 	
 	public LinhaReserva(String data, String hora) {
 		this.data = data;
@@ -19,6 +22,18 @@ public class LinhaReserva {
 	public void notificarGrelhas() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getDate() {
+		return this.data;
+	}
+	
+	public String getTime() {
+		return this.hora;
+	}
+	
+	public void addLugar(Lugar l) {
+		this.lugar = l;
 	}
 
 }
