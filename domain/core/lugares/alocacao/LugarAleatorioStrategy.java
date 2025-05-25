@@ -14,15 +14,16 @@ import domain.core.lugares.TipoDeLugar;
 public class LugarAleatorioStrategy implements IEncontrarLugarStrategy {
 
 	public Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> t, LocalDate data, LocalTime hora) {
-		List<Lugar> candidatos = grelha.getLugares().stream()
-	            .filter(l -> l.getDesignacaoTipo() != null)
-	            .filter(l -> l.getDesignacaoTipo().equals(tp.getDesig()))
-	            .filter(l -> l.disponivel(data, hora))
-	            .collect(Collectors.toList());
+		
+        String tipoDesejado = t.map(TipoDeLugar::getDesig).orElse(null);
 
-	        Collections.shuffle(candidatos);
+        List<Lugar> candidatos = grelha.getLugares().stream()
+            .filter(l -> l.disponivel(data, hora))
+            .filter(l -> tipoDesejado == null || l.getDesignacaoTipo().equals(tipoDesejado))
+            .collect(Collectors.toList());
 
-	        return candidatos.stream().findFirst();
+        Collections.shuffle(candidatos);
+        return candidatos.stream().findFirst();
 	}
 
 	
