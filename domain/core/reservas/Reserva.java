@@ -14,7 +14,8 @@ public class Reserva {
     private List<Pagamento> pagamentos;
     private LinhaReserva linhaCorrente;
 
-    public Reserva(){
+    public Reserva(int codigo){
+    	this.codigo = codigo;
         this.linhasReserva = new ArrayList<>();
         this.pagamentos = new ArrayList<>();
     }
@@ -47,12 +48,15 @@ public class Reserva {
     	return linhaCorrente.getHora(); // ainda por definir na linhareserva
     }
     
+    public double getPreco() {
+    	return linhaCorrente.getSubtotal();
+    }
     
     public void setCliente(ClienteFinal cli) {
         this.client = cli;
     }
 
-    public LinhaReserva novaLinha(LocalDate data, LocalTime hora) {
+    public LinhaReserva novaLinha(String data, String hora) {
         finalizar();
         LinhaReserva linhaCorrente = new LinhaReserva(data, hora);
         return linhaCorrente;
@@ -82,9 +86,6 @@ public class Reserva {
     		linha.notificarGrelhas(); // ainda por definir tb na linhareserva
     	}
     }
-
-    
-    
 
     public void registarPagamento(Pagamento pg){
         pagamentos.add(pg);
