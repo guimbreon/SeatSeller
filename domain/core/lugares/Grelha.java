@@ -103,7 +103,7 @@ public class Grelha {
         }
     }
     
-    public Lugar getDisponivel(Optional<TipoDeLugar> t, String data, String hora) {
+    public Optional<Lugar> getDisponivel(TipoDeLugar t, String data, String hora) {
     	IEncontrarLugarStrategy strat = EncontrarLugarStrategyFactory.getInstance().getEncontrarLugarStrategy();
         return strat.getLugar(this, t, data, hora);	
     }
