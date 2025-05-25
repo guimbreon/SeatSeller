@@ -3,12 +3,32 @@ package domain.core.lugares;
 import java.util.HashMap;
 import java.util.Map;
 
+import domain.api.wrappers.Combinacao;
+
+import java.util.List;
+import java.util.ArrayList;
+
 public class CatalogoGrelhas {
 
     private Map<String, Grelha> grelhas = new HashMap<>();
-    
-    
+
     public Grelha getGrelha(String desig) {
         return grelhas.get(desig);
+    }
+
+    public List<Combinacao> getCombinacoes() {
+        List<Combinacao> comb = new ArrayList<>();
+
+        for (Grelha g : grelhas.values()) {
+            // Assuming getCombinacoes returns a List<Combinacao> or a single Combinacao
+            List<Combinacao> c = g.getCombinacoes(null, null);  // Adjust this if it's a list
+            if (c != null) {
+                for (Combinacao combItem : c) {
+                    comb.add(combItem);
+                }
+            }
+        }
+
+        return comb;
     }
 }

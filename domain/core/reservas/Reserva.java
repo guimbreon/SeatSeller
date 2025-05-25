@@ -5,22 +5,24 @@ import domain.core.pagamentos.Pagamento;
 import domain.core.utilizadores.ClienteFinal;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Reserva {
-    private int codigo;
+    private String codigo;
     private List<LinhaReserva> linhasReserva;
     private ClienteFinal client;
     private List<Pagamento> pagamentos;
     private LinhaReserva linhaCorrente;
 
-    public Reserva(int codigo){
+    public Reserva(String codigo){
     	this.codigo = codigo;
         this.linhasReserva = new ArrayList<>();
         this.pagamentos = new ArrayList<>();
     }
     
-    public int getCodigo(){
+    public String getCodigo(){
         return codigo;
     }
 
@@ -56,7 +58,7 @@ public class Reserva {
         this.client = cli;
     }
 
-    public LinhaReserva novaLinha(String data, String hora) {
+    public LinhaReserva novaLinha(LocalDate date, LocalTime time) {
         finalizar();
         LinhaReserva linhaCorrente = new LinhaReserva(data, hora);
         return linhaCorrente;

@@ -5,6 +5,7 @@ import domain.api.exceptions.DoesNotExistException;
 import domain.api.exceptions.InvalidCreditCardException;
 import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
 import domain.core.reservas.CatalogoReservas;
+import domain.core.reservas.Reserva;
 import domain.core.utilizadores.Utilizador;
 
 public class ConcluirReservaHandler implements IConcluirReservaHandler {
@@ -22,14 +23,17 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
 
 	@Override
 	public double confirmarValorEmFalta(String codRes) throws DoesNotExistException {
-		// TODO Auto-generated method stub
-		return 0;
+		Reserva res = this.catReservas.getReserva(codRes);
+		return res.getValorEmFalta();
 	}
 
 	@Override
 	public void indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
-		// TODO Auto-generated method stub
-
+		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
+		if(b) {
+			//to do
+		}
+		
 	}
 
 }

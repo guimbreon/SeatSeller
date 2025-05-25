@@ -1,5 +1,7 @@
 package domain.core.reservas;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import domain.core.lugares.Lugar;
@@ -7,11 +9,11 @@ import domain.core.lugares.Lugar;
 public class LinhaReserva {
 
 
-	private String data;
-	private String hora;
+	private LocalDate data;
+	private LocalTime hora;
     private List<ReservaLugar> reservaLugar;
-	
-	public LinhaReserva(String data, String hora) {
+    
+	public LinhaReserva(LocalDate data, LocalTime hora) {
 		this.data = data;
 		this.hora = hora;
 	}
@@ -31,11 +33,11 @@ public class LinhaReserva {
     	}
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return this.data;
 	}
 	
-	public String getTime() {
+	public LocalTime getTime() {
 		return this.hora;
 	}
 	

@@ -1,5 +1,7 @@
 package domain.core.lugares;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,11 +60,11 @@ public class Lugar {
 		this.reservaLugar.add(rl);
 	}
 
-    public boolean disponivel(String data, String hora) {
+    public boolean disponivel(LocalDate date, LocalTime time) {
     	LinhaReserva linhaReserva;
     	for(ReservaLugar rl: this.reservaLugar) {
     		linhaReserva = rl.getLinhaReserva();
-    		if(linhaReserva.getDate() == data || linhaReserva.getTime() == hora) {
+    		if(linhaReserva.getDate() == date || linhaReserva.getTime() == time) {
     			return false;
     		}
     	}

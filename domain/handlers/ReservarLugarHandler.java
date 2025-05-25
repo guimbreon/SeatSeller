@@ -11,7 +11,10 @@ import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
 import domain.core.lugares.CatalogoGrelhas;
 import domain.core.lugares.CatalogoTiposDeLugar;
 import domain.core.reservas.CatalogoReservas;
+import domain.core.reservas.Reserva;
+import domain.core.reservas.ReservaFactory;
 import domain.core.utilizadores.CatalogoUtilizadores;
+import domain.core.utilizadores.ClienteFinal;
 import domain.core.utilizadores.Utilizador;
 
 public class ReservarLugarHandler implements IReservarLugarHandler {
@@ -22,6 +25,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
     private CatalogoReservas catReservas;
     private CatalogoUtilizadores catUtilizadores;
     private ISistemaDeCartoesDeCreditoAdapter creditCardSystem;
+    private Reserva res;
 
     public ReservarLugarHandler(Utilizador utilizador, CatalogoGrelhas catGrelhas, CatalogoTiposDeLugar catTipos,
             CatalogoReservas catReservas, CatalogoUtilizadores catUtilizadores,
@@ -36,13 +40,20 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 
 	@Override
 	public void indicarCliente(String nCli) throws DoesNotExistException {
-		// TODO Auto-generated method stub
-
+		this.catUtilizadores.getCliente(nCli);
 	}
 
 	@Override
 	public Iterable<Combinacao> indicarDataHora(LocalDate date, LocalTime time) {
-		// TODO Auto-generated method stub
+		if(this.res == null) {
+			ReservaFactory rf = ReservaFactory.getInstance();
+			rf.addCatReservas(catReservas);
+			this.res = rf.getProximaReserva();			
+		}
+		ClienteFinal cf = (ClienteFinal) this.utilizador;
+		res.setCliente(cf);
+		res.novaLinha(date, time);
+		catGrelhas.getCombinacoes(date, time);
 		return null;
 	}
 
