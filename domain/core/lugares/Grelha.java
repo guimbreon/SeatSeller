@@ -39,7 +39,7 @@ public class Grelha {
     	Map<String, Object> info = new HashMap<String, Object>();
         info.put("grelha", getDesignacao());
         info.put("lugar", lug.toString());
-        support.firePropertyChange("reservaConfirmada", null, lug);
+        support.firePropertyChange("reservaConfirmada", null, info);
     }
     
     public String getDesignacao() {
