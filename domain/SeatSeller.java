@@ -11,6 +11,7 @@ import domain.core.lugares.CatalogoGrelhas;
 import domain.core.lugares.CatalogoTiposDeLugar;
 import domain.core.reservas.CatalogoReservas;
 import domain.core.utilizadores.CatalogoUtilizadores;
+import domain.core.utilizadores.Utilizador;
 import domain.handlers.RegistarUtilizadorHandler;
 import domain.handlers.Sessao;
 
