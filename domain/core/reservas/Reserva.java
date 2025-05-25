@@ -60,7 +60,7 @@ public class Reserva {
 
     public LinhaReserva novaLinha(LocalDate date, LocalTime time) {
         finalizar();
-        LinhaReserva linhaCorrente = new LinhaReserva(data, hora);
+        LinhaReserva linhaCorrente = new LinhaReserva(date, time);
         return linhaCorrente;
     }
 
