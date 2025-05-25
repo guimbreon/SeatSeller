@@ -96,8 +96,8 @@ public class Grelha {
     }
     
     public void criaLugares(double alt, double larg, Optional<TipoDeLugar> padr) {
-        for (int i = 1; i <= alt; i++) {
-            for (int j = 1; j <= larg; j++) {
+        for (int i = 0; i < alt; i++) {
+            for (int j = 0; j < larg; j++) {
                 TipoDeLugar tipo = padr.isPresent() ? padr.get() : null;
                 Lugar l = new Lugar(i, j, tipo, this);
                 lugares.add(l);
