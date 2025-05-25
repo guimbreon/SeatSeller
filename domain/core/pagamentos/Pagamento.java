@@ -2,17 +2,17 @@ package domain.core.pagamentos;
 
 public class Pagamento {
 
-    private Boolean cativar;
+    private boolean cativar;
     private double valor;
 
     // Construtor
-    public Pagamento(Boolean cativar, double valor) {
+    public Pagamento(boolean cativar, double valor) {
         this.cativar = cativar;
         this.valor = valor;
     }
 
     
-    public Boolean getCativar() {
+    public boolean getCativar() {
         return cativar;
     }
 
