@@ -1,10 +1,12 @@
 package domain.handlers;
 
 import domain.api.IAssociarGrelhaHandler;
+
 import domain.api.INotificacaoReceiver;
 import domain.core.lugares.CatalogoGrelhas;
 import domain.core.lugares.Grelha;
 import domain.core.utilizadores.Utilizador;
+import domain.core.utilizadores.Funcionario;
 
 public class AssociarGrelhaHandler implements IAssociarGrelhaHandler {
 
@@ -20,8 +22,10 @@ public class AssociarGrelhaHandler implements IAssociarGrelhaHandler {
 	@Override
 	public void associarGrelha(String desig, INotificacaoReceiver c) {
 		Grelha g = this.catGrelhas.getGrelha(desig);
-		
-		utilizador.associarGrelha(g, c);
+		Funcionario f = (Funcionario) utilizador;
+		if(g != null) {
+			f.associarGrelha(g, c);	
+		}
 	}
 
 }

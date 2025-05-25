@@ -12,6 +12,7 @@ import java.util.Optional;
 import domain.api.wrappers.Combinacao;
 import domain.core.lugares.alocacao.EncontrarLugarStrategyFactory;
 import domain.core.lugares.alocacao.IEncontrarLugarStrategy;
+import domain.core.utilizadores.Funcionario;
 
 public class Grelha {
 
@@ -26,12 +27,12 @@ public class Grelha {
         this.indicePreco = indicePreco;
     }
     
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
+    public void addObserver(Funcionario f) {
+        support.addPropertyChangeListener(f);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.removePropertyChangeListener(listener);
+    public void deleteObserver(Funcionario f) {
+        support.removePropertyChangeListener(f);
     }
     
     
