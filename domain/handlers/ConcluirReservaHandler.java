@@ -4,8 +4,10 @@ import domain.api.IConcluirReservaHandler;
 import domain.api.exceptions.DoesNotExistException;
 import domain.api.exceptions.InvalidCreditCardException;
 import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
+import domain.core.pagamentos.Pagamento;
 import domain.core.reservas.CatalogoReservas;
 import domain.core.reservas.Reserva;
+import domain.core.utilizadores.ClienteFinal;
 import domain.core.utilizadores.Utilizador;
 
 public class ConcluirReservaHandler implements IConcluirReservaHandler {
@@ -13,7 +15,9 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
     private Utilizador utilizador;
     private CatalogoReservas catReservas;
     private ISistemaDeCartoesDeCreditoAdapter creditCardSystem;
-
+    private Reserva res;
+    private double valorFalta; 
+    
     public ConcluirReservaHandler(Utilizador utilizador, CatalogoReservas catReservas,
             ISistemaDeCartoesDeCreditoAdapter creditCardSystem) {
         this.utilizador = utilizador;
@@ -23,17 +27,24 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
 
 	@Override
 	public double confirmarValorEmFalta(String codRes) throws DoesNotExistException {
-		Reserva res = this.catReservas.getReserva(codRes);
-		return res.getValorEmFalta();
+		this.res = this.catReservas.getReserva(codRes);
+		valorFalta = res.getValorEmFalta();
+		return valorFalta;
 	}
 
 	@Override
 	public void indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
+		ClienteFinal cli = res.getCliente();
 		if(b) {
-			//to do
+			boolean temCC = cli.temCC(num);
+			if(!temCC) {
+				cli.criaCC(num, ccv, mes, ano);
+			}
 		}
-		
+		Pagamento pg = new Pagamento("false", valorFalta);
+		cli.registarPagamento(pg);
+		creditCardSystem.retirar(num, ccv, mes, ano, ano);
 	}
 
 }

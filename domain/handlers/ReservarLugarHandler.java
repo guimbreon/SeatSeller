@@ -2,6 +2,7 @@ package domain.handlers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import domain.api.IReservarLugarHandler;
 import domain.api.exceptions.DoesNotExistException;
@@ -10,6 +11,8 @@ import domain.api.wrappers.Combinacao;
 import domain.cartoesdecredito.ISistemaDeCartoesDeCreditoAdapter;
 import domain.core.lugares.CatalogoGrelhas;
 import domain.core.lugares.CatalogoTiposDeLugar;
+import domain.core.lugares.Grelha;
+import domain.core.lugares.TipoDeLugar;
 import domain.core.reservas.CatalogoReservas;
 import domain.core.reservas.Reserva;
 import domain.core.reservas.ReservaFactory;
@@ -36,6 +39,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
         this.catReservas = catReservas;
         this.catUtilizadores = catUtilizadores;
         this.creditCardSystem = creditCardSystem;
+        
     }
 
 	@Override
@@ -59,7 +63,10 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 
 	@Override
 	public String indicarCombinacao(String grelha, String tipoDeLugar) throws DoesNotExistException {
-		// TODO Auto-generated method stub
+		Grelha g = catGrelhas.getGrelha(grelha);
+		Optional<TipoDeLugar> t = catTipos.getTipo(tipoDeLugar);
+		LocalDate data = res.getDataCorrente();
+		LocalTime time = res.getHoraCorrente();
 		return null;
 	}
 
