@@ -13,7 +13,7 @@ import domain.core.lugares.TipoDeLugar;
 
 public class LugarAleatorioStrategy implements IEncontrarLugarStrategy {
 
-	public Optional<Lugar> getLugar(Grelha grelha, TipoDeLugar tp, LocalDate data, LocalTime hora) {
+	public Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> t, LocalDate data, LocalTime hora) {
 		List<Lugar> candidatos = grelha.getLugares().stream()
 	            .filter(l -> l.getDesignacaoTipo() != null)
 	            .filter(l -> l.getDesignacaoTipo().equals(tp.getDesig()))
@@ -24,6 +24,7 @@ public class LugarAleatorioStrategy implements IEncontrarLugarStrategy {
 
 	        return candidatos.stream().findFirst();
 	}
+
 	
 	
 }

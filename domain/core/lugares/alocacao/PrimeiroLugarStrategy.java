@@ -10,7 +10,7 @@ import domain.core.lugares.TipoDeLugar;
 
 public class PrimeiroLugarStrategy implements IEncontrarLugarStrategy {
 
-	public Optional<Lugar> getLugar(Grelha grelha, TipoDeLugar tp,  LocalDate data, LocalTime hora) {
+	public Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> t, LocalDate data, LocalTime hora) {
 		return grelha.getLugares().stream()
 	            .filter(lugar -> lugar.getDesignacaoTipo() != null)
 	            .filter(lugar -> lugar.getDesignacaoTipo().equals(tp.getDesig()))

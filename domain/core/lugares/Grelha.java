@@ -1,6 +1,5 @@
 package domain.core.lugares;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
 import java.time.LocalTime;
