@@ -10,6 +10,8 @@ import java.util.Optional;
 
 
 import domain.api.wrappers.Combinacao;
+import domain.core.lugares.alocacao.EncontrarLugarStrategyFactory;
+import domain.core.lugares.alocacao.IEncontrarLugarStrategy;
 
 public class Grelha {
 
@@ -102,7 +104,7 @@ public class Grelha {
     }
     
     public Lugar getDisponivel(Optional<TipoDeLugar> t, String data, String hora) {
-    	EncontrarLugarStrategy strat = EncontrarLugarStrategyFactory.getEncontrarLugarStrategy();
+    	IEncontrarLugarStrategy strat = EncontrarLugarStrategyFactory.getInstance().getEncontrarLugarStrategy();
         return strat.getLugar(this, t, data, hora);	
     }
     

@@ -39,13 +39,13 @@ public class Reserva {
     public String getDataCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
-    	return linhaCorrente.getData(); // ainda por definir na linhareserva
+    	return linhaCorrente.getDate(); // ainda por definir na linhareserva
     }
     
     public String getHoraCorrente() {
     	if (linhaCorrente == null) {
     		return null;}
-    	return linhaCorrente.getHora(); // ainda por definir na linhareserva
+    	return linhaCorrente.getTime(); // ainda por definir na linhareserva
     }
     
     public double getPreco() {
