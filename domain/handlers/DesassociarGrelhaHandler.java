@@ -18,6 +18,13 @@ public class DesassociarGrelhaHandler implements IDesassociarGrelhaHandler {
     }
 
 
+    /**
+     * Desassocia a grelha com a designação especificada do funcionário.
+     * Se a grelha existir, chama o método de desassociação no funcionário.
+     * 
+     * @param desig Designação da grelha a desassociar.
+     * @param c Interface para notificação do resultado da operação.
+     */
 	@Override
 	public void desassociarGrelha(String desig, INotificacaoReceiver c) {
 		Grelha g = this.catGrelhas.getGrelha(desig);

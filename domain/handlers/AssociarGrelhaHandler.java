@@ -19,6 +19,13 @@ public class AssociarGrelhaHandler implements IAssociarGrelhaHandler {
 	    }
 
 
+    /**
+     * Associa a grelha indicada pela designação ao funcionário que está usando o handler.
+     * Se a grelha existir, o funcionário é informado da associação via o receptor de notificações.
+     * 
+     * @param desig Designação da grelha a ser associada.
+     * @param c Receptor que irá receber notificações da associação.
+     */
 	@Override
 	public void associarGrelha(String desig, INotificacaoReceiver c) {
 		Grelha g = this.catGrelhas.getGrelha(desig);

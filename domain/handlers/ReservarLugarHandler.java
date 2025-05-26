@@ -52,11 +52,26 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
         
     }
 
+    
+    /**
+     * Indica o cliente responsável pela reserva.
+     * 
+     * @param nCli Nome ou identificador do cliente.
+     * @throws DoesNotExistException Se o cliente não existir no catálogo.
+     */
 	@Override
 	public void indicarCliente(String nCli) throws DoesNotExistException {
 		this.catUtilizadores.getCliente(nCli);
 	}
 
+	
+	 /**
+     * Indica a data e hora da reserva e inicializa a linha corrente da reserva.
+     * 
+     * @param date Data da reserva.
+     * @param time Hora da reserva.
+     * @return Iterable com as combinações de grelha e tipo de lugar disponíveis nessa data e hora.
+     */
 	@Override
 	public Iterable<Combinacao> indicarDataHora(LocalDate date, LocalTime time) {
 		if(this.res == null) {
@@ -70,6 +85,15 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		return catGrelhas.getCombinacoes(date, time);
 	}
 
+	
+	/**
+     * Indica a combinação escolhida de grelha e tipo de lugar para reserva.
+     * 
+     * @param grelha Nome da grelha.
+     * @param tipoDeLugar Designação do tipo de lugar.
+     * @return Representação textual do lugar reservado.
+     * @throws DoesNotExistException Se a grelha ou tipo de lugar não existir.
+     */
 	@Override
 	public String indicarCombinacao(String grelha, String tipoDeLugar) throws DoesNotExistException {
 		Grelha g = catGrelhas.getGrelha(grelha);
@@ -77,17 +101,28 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		LocalDate data = res.getDataCorrente();
 		LocalTime hora = res.getHoraCorrente();
 		Optional<Lugar> lug = g.getDisponivel(t, data, hora);
-		lr.addLugar(lug.get(), t.get());
+		lr.addLugar(lug.get(), t.get(), g);
 		return lug.toString();
 	}
 
-	
+    /**
+     * Finaliza a adição de lugares na linha corrente da reserva.
+     */
 	@Override
 	public void terminarLugares() {
 		res.finalizar();
 	}
 
-	
+    /**
+     * Indica os dados do cartão de crédito para validação e obtenção do preço da reserva.
+     * 
+     * @param num Número do cartão.
+     * @param ccv Código de verificação.
+     * @param mes Mês de validade.
+     * @param ano Ano de validade.
+     * @return Preço total da reserva.
+     * @throws InvalidCreditCardException Se os dados do cartão não forem válidos.
+     */
 	@Override
 	public double indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
@@ -104,6 +139,12 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		return preco;
 	}
 
+	
+	 /**
+     * Confirma a reserva, registra o pagamento e notifica as grelhas.
+     * 
+     * @return Código da reserva confirmada.
+     */
 	@Override
 	public String confirmarReserva() {
 		Configuration conf = Configuration.getInstance();

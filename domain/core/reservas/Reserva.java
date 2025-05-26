@@ -135,9 +135,12 @@ public class Reserva {
     		total += linha.getSubtotal(); //ainda por definir na LinhaReserva
     	}
     	double totalPago = 0;
-    	for (Pagamento pagamento : pagamentos) {
-    		totalPago += pagamento.getValor(); 
+    	if(!pagamentos.isEmpty()) {
+    		for (Pagamento pagamento : pagamentos) {
+        		totalPago += pagamento.getValor(); 
+        	}	
     	}
+    	
     	return total-totalPago;
     }
     

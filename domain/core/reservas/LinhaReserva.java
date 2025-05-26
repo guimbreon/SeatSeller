@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import domain.core.lugares.Grelha;
 import domain.core.lugares.Lugar;
 import domain.core.lugares.TipoDeLugar;
 
@@ -16,12 +17,14 @@ public class LinhaReserva {
 	private LocalTime hora;
     private List<ReservaLugar> reservaLugar;
     private List<TipoDeLugar> lugares;
+    private Grelha grelha;
     
 	public LinhaReserva(LocalDate data, LocalTime hora) {
 		this.data = data;
 		this.hora = hora;
 		this.reservaLugar = new ArrayList<>();;
 		this.lugares = new ArrayList<>();
+		
 	}
 	 /**
      * Calcula o subtotal desta linha de reserva, somando o preço de todos os tipos
@@ -33,7 +36,7 @@ public class LinhaReserva {
 		int subtotal = 0;
 		
     	for(TipoDeLugar rl: this.lugares) {
-    		subtotal += rl.getPreco();
+    		subtotal += rl.getPreco() * grelha.getIndice();
     	}
 		return subtotal;
 	}
@@ -72,9 +75,10 @@ public class LinhaReserva {
      * @param lug lugar reservado
      * @param lr  tipo do lugar reservado
      */
-	public void addLugar(Lugar lug, TipoDeLugar lr) {
+	public void addLugar(Lugar lug, TipoDeLugar lr, Grelha g) {
 		ReservaLugar rl = new ReservaLugar(lug, this);
 		lugares.add(lr);
+		grelha = g;
 		this.reservaLugar.add(rl);
 	}
 

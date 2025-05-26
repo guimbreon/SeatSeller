@@ -87,6 +87,9 @@ public class CriarGrelhaHandler implements ICriarGrelhaHandler {
 
 	}
 
+	 /**
+     * Finaliza a criação da grelha, adicionando-a ao catálogo de grelhas.
+     */
 	@Override
 	public void terminar() {
 		catGrelhas.acrescentaGrelha(g);

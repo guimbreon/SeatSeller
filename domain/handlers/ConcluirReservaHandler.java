@@ -25,16 +25,33 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
         this.creditCardSystem = creditCardSystem;
     }
 
+    /**
+     * Obtém o valor que falta pagar para a reserva identificada pelo código.
+     * 
+     * @param codRes Código da reserva.
+     * @return Valor em falta para pagamento.
+     * @throws DoesNotExistException Se a reserva não for encontrada.
+     */
 	@Override
 	public double confirmarValorEmFalta(String codRes) throws DoesNotExistException {
 		res = catReservas.getReserva(codRes);
 		if (res == null) {
-			return 13;
+			return 0;
 		}
 		valorFalta = res.getValorEmFalta();
 		return valorFalta;
 	}
 
+	 /**
+     * Indica os dados do cartão de crédito para realizar o pagamento do valor em falta.
+     * Valida o cartão e registra o pagamento.
+     * 
+     * @param num Número do cartão de crédito.
+     * @param ccv Código CCV do cartão.
+     * @param mes Mês de validade do cartão.
+     * @param ano Ano de validade do cartão.
+     * @throws InvalidCreditCardException Se os dados do cartão forem inválidos.
+     */
 	@Override
 	public void indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
