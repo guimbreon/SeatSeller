@@ -10,6 +10,17 @@ import domain.core.lugares.TipoDeLugar;
 
 public class LugarMaisAfastadoStrategy implements IEncontrarLugarStrategy {
 
+    /**
+     * Procura o lugar disponível com a maior linha (e maior coluna em caso de empate),
+     * que esteja livre na data e hora especificadas, e que corresponda ao tipo de lugar
+     * desejado, se especificado.
+     *
+     * @param grelha a grelha onde a procura será feita
+     * @param tp o tipo de lugar desejado (opcional)
+     * @param data a data para verificar disponibilidade
+     * @param hora a hora para verificar disponibilidade
+     * @return um {@link Optional} com o lugar mais afastado disponível ou vazio se não houver
+     */
 	 @Override
      public Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> tp, LocalDate data, LocalTime hora) {
         Optional<String> tipoDesejado = tp.map(TipoDeLugar::getDesig);

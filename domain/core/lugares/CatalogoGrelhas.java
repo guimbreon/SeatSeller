@@ -14,10 +14,24 @@ public class CatalogoGrelhas {
 
     private Map<String, Grelha> grelhas = new HashMap<>();
 
+    /**
+     * Obtém a grelha com a designação fornecida.
+     *
+     * @param desig a designação da grelha
+     * @return a grelha correspondente ou null se não existir
+     */
     public Grelha getGrelha(String desig) {
         return grelhas.get(desig);
     }
 
+    /**
+     * Obtém uma lista de combinações (grelha + tipo de lugar + preço + disponibilidade)
+     * disponíveis para a data e hora fornecidas, agregadas de todas as grelhas.
+     *
+     * @param date a data da sessão
+     * @param time a hora da sessão
+     * @return lista de combinações disponíveis
+     */
     public List<Combinacao> getCombinacoes(LocalDate date, LocalTime time) {
         List<Combinacao> comb = new ArrayList<>();
 
@@ -34,10 +48,22 @@ public class CatalogoGrelhas {
         return comb;
     }
     
+    /**
+     * Verifica se existe uma grelha com a designação fornecida.
+     *
+     * @param desig a designação da grelha
+     * @return true se a grelha existir, false caso contrário
+     */
     public boolean existeGrelha(String desig) {
         return grelhas.containsKey(desig);
     }
     
+    
+    /**
+     * Acrescenta uma nova grelha ao catálogo.
+     *
+     * @param g a grelha a adicionar
+     */
     public void acrescentaGrelha(Grelha g) {
         grelhas.put(g.getDesignacao(), g);
     }

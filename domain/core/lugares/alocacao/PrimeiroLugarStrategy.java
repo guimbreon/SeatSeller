@@ -10,6 +10,20 @@ import domain.core.lugares.TipoDeLugar;
 
 public class PrimeiroLugarStrategy implements IEncontrarLugarStrategy {
 
+	/**
+     * Retorna o primeiro {@link Lugar} disponível na {@link Grelha} que:
+     * <ul>
+     *   <li>Esteja livre na data e hora especificadas</li>
+     *   <li>Seja do tipo desejado, caso especificado</li>
+     * </ul>
+     *
+     * @param grelha a grelha onde procurar
+     * @param t o tipo de lugar desejado, se houver
+     * @param data a data para a qual verificar disponibilidade
+     * @param hora a hora para a qual verificar disponibilidade
+     * @return um Optional contendo o primeiro lugar disponível que satisfaça os critérios, ou vazio se não houver
+     */
+	@Override
 	public Optional<Lugar> getLugar(Grelha grelha, Optional<TipoDeLugar> t, LocalDate data, LocalTime hora) {
 		Optional<String> tipoDesejado = t.map(TipoDeLugar::getDesig);
 

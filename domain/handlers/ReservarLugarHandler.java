@@ -18,6 +18,7 @@ import domain.core.lugares.TipoDeLugar;
 import domain.core.pagamentos.CartaoCredito;
 import domain.core.pagamentos.Pagamento;
 import domain.core.reservas.CatalogoReservas;
+import domain.core.reservas.LinhaReserva;
 import domain.core.reservas.Reserva;
 import domain.core.reservas.ReservaFactory;
 import domain.core.utilizadores.CatalogoUtilizadores;
@@ -36,6 +37,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
     private Utilizador cli;
     private double preco;
     private CartaoCredito cc;
+    private LinhaReserva lr;
     
     
     public ReservarLugarHandler(Utilizador utilizador, CatalogoGrelhas catGrelhas, CatalogoTiposDeLugar catTipos,
@@ -64,7 +66,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		}
 		cli = (Utilizador) this.utilizador;
 		res.setCliente(cli);
-		res.novaLinha(date, time);
+		this.lr = res.novaLinha(date, time);
 		return catGrelhas.getCombinacoes(date, time);
 	}
 
@@ -75,15 +77,17 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		LocalDate data = res.getDataCorrente();
 		LocalTime hora = res.getHoraCorrente();
 		Optional<Lugar> lug = g.getDisponivel(t, data, hora);
-		
+		lr.addLugar(lug.get(), t.get());
 		return lug.toString();
 	}
 
+	
 	@Override
 	public void terminarLugares() {
 		res.finalizar();
 	}
 
+	
 	@Override
 	public double indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
@@ -91,10 +95,11 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 		if(b) {
 			boolean temCC = cli.temCC(num);
 			if(!temCC) {
-				cli.criaCC(num, ccv, mes, ano);
+				cc = cli.criaCC(num, ccv, mes, ano);
+			}else {
+				cc = new CartaoCredito(num, ccv, mes, ano);
 			}
 		}
-		cc = new CartaoCredito(num, ccv, mes, ano);
 		this.preco = res.getPreco();
 		return preco;
 	}

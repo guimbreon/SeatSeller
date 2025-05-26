@@ -2,6 +2,7 @@ package domain.cartoesdecredito;
 
 public class SistemaDeCartoesDeCreditoDummy implements ISistemaDeCartoesDeCreditoAdapter{
 
+	
 	@Override
 	public boolean validar(String num, int ccv, int mes, int ano) {
 		

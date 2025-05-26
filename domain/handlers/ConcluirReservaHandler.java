@@ -27,7 +27,10 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
 
 	@Override
 	public double confirmarValorEmFalta(String codRes) throws DoesNotExistException {
-		this.res = this.catReservas.getReserva(codRes);
+		res = catReservas.getReserva(codRes);
+		if (res == null) {
+			return 13;
+		}
 		valorFalta = res.getValorEmFalta();
 		return valorFalta;
 	}
@@ -35,16 +38,18 @@ public class ConcluirReservaHandler implements IConcluirReservaHandler {
 	@Override
 	public void indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
-		ClienteFinal cli = res.getCliente();
-		if(b) {
-			boolean temCC = cli.temCC(num);
-			if(!temCC) {
-				cli.criaCC(num, ccv, mes, ano);
+		if(res != null) {
+			Utilizador cli = res.getCliente();
+			if(b) {
+				boolean temCC = cli.temCC(num);
+				if(!temCC) {
+					cli.criaCC(num, ccv, mes, ano);
+				}
 			}
+			Pagamento pg = new Pagamento(false, valorFalta);
+			cli.registarPagamento(pg);
+			creditCardSystem.retirar(num, ccv, mes, ano, ano);
 		}
-		Pagamento pg = new Pagamento(false, valorFalta);
-		cli.registarPagamento(pg);
-		creditCardSystem.retirar(num, ccv, mes, ano, ano);
 	}
 
 }

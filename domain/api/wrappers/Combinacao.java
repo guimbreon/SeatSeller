@@ -25,19 +25,38 @@ public class Combinacao {
 		this.preco = p;
 		this.disponibilidade = 1;
 	}
-
+	/**
+	 * Obtém a designação da grelha.
+	 *
+	 * @return a grelha
+	 */
 	public String getGrelha() {
 		return grelha;
 	}
-
+	
+	/**
+	 * Obtém o tipo de lugar.
+	 *
+	 * @return o tipo de lugar
+	 */
 	public String getTipoDeLugar() {
 		return tipoDeLugar;
 	}
 
+	/**
+	 * Obtém o preço do lugar.
+	 *
+	 * @return o preço
+	 */
 	public double getPreco() {
 		return preco;
 	}
 
+	/**
+	 * Obtém o número de lugares disponíveis.
+	 *
+	 * @return a disponibilidade
+	 */
 	public int getDisponibilidade() {
 		return disponibilidade;
 	}
@@ -49,6 +68,11 @@ public class Combinacao {
 		disponibilidade++;
 	}
 	
+	/**
+	 * Retorna uma representação textual da combinação.
+	 *
+	 * @return uma string formatada com os dados da combinação
+	 */
 	public String toString() {
 		return this.getGrelha() + " | " + this.getTipoDeLugar() + " | " + 
 	           this.getPreco() + " € | " + this.getDisponibilidade() + " livres";

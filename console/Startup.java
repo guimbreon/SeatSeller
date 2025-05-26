@@ -91,13 +91,9 @@ public class Startup {
 		
 		if (!tipoDeLugarPadrao.isPresent()) {
 			try {
-				System.out.println("a");
 				cgh.indicarTipoPadrao("Lugar Normal");
-				System.out.println("b");
 				for(int i=0; i<10; i++) {
-					System.out.println("c");
 					cgh.indicarTipoLugar(5, i, "Lugar Acessível");
-					System.out.println("d");
 				}
 			} catch (DoesNotExistException e) {
 				LOGGER.log(Level.SEVERE, "Tipo de Lugar não existe", e);
