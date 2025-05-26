@@ -33,7 +33,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
     private CatalogoUtilizadores catUtilizadores;
     private ISistemaDeCartoesDeCreditoAdapter creditCardSystem;
     private Reserva res;
-    private ClienteFinal cli;
+    private Utilizador cli;
     private double preco;
     private CartaoCredito cc;
     
@@ -62,17 +62,16 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 			rf.addCatReservas(catReservas);
 			this.res = rf.getProximaReserva();			
 		}
-		cli = (ClienteFinal) this.utilizador;
+		cli = (Utilizador) this.utilizador;
 		res.setCliente(cli);
 		res.novaLinha(date, time);
-		catGrelhas.getCombinacoes(date, time);
-		return null;
+		return catGrelhas.getCombinacoes(date, time);
 	}
 
 	@Override
 	public String indicarCombinacao(String grelha, String tipoDeLugar) throws DoesNotExistException {
 		Grelha g = catGrelhas.getGrelha(grelha);
-		Optional<TipoDeLugar> t = catTipos.getTipoLugar(tipoDeLugar);
+		Optional<TipoDeLugar> t = catTipos.getTipo(tipoDeLugar);
 		LocalDate data = res.getDataCorrente();
 		LocalTime hora = res.getHoraCorrente();
 		Optional<Lugar> lug = g.getDisponivel(t, data, hora);
@@ -88,7 +87,7 @@ public class ReservarLugarHandler implements IReservarLugarHandler {
 	@Override
 	public double indicarCC(String num, int ccv, int mes, int ano) throws InvalidCreditCardException {
 		boolean b = this.creditCardSystem.validar(num, ccv, mes, ano);
-		ClienteFinal cli = res.getCliente();
+		Utilizador cli = res.getCliente();
 		if(b) {
 			boolean temCC = cli.temCC(num);
 			if(!temCC) {

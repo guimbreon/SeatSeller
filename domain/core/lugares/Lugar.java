@@ -2,6 +2,7 @@ package domain.core.lugares;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class Lugar {
         this.coluna = coluna;
         this.tipo = tipo;
         this.grelha = grelha;
-    }
+        this.reservaLugar = new ArrayList<>();    }
 
     public void notificarGrelha() {
         grelha.notificar(this);

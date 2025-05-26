@@ -18,7 +18,9 @@ public class CatalogoTiposDeLugar {
 		return tipoPadrao;
 	}
 
-	public Optional<TipoDeLugar> getTipoLugar(String desig) {
+	public Optional<TipoDeLugar> getTipo(String desig) {
 		return Optional.ofNullable(tipos.get(desig));
 	}
+
+
 }

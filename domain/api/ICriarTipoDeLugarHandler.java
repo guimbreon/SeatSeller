@@ -1,5 +1,9 @@
 package domain.api;
 
+import java.util.Map;
+
+import domain.core.lugares.TipoDeLugar;
+
 /**
  * Handler do Caso de Uso UC3 - Criar Tipo de lugar
  * Este handler so' estara' acessivel caso o utilizador autenticado seja 
@@ -15,4 +19,5 @@ public interface ICriarTipoDeLugarHandler {
 	 * @param padrao - se true e' tipo de lugar padrao
 	 */
 	void criarTipoDeLugar(String desig, String desc, double preco, boolean padrao);
+
 }

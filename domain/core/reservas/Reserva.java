@@ -3,6 +3,7 @@ package domain.core.reservas;
 
 import domain.core.pagamentos.Pagamento;
 import domain.core.utilizadores.ClienteFinal;
+import domain.core.utilizadores.Utilizador;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class Reserva {
     private String codigo;
     private List<LinhaReserva> linhasReserva;
-    private ClienteFinal client;
+    private Utilizador client;
     private List<Pagamento> pagamentos;
     private LinhaReserva linhaCorrente;
 
@@ -26,7 +27,7 @@ public class Reserva {
         return codigo;
     }
 
-    public ClienteFinal getCliente () {
+    public Utilizador getCliente () {
         return client;
     }
 
@@ -54,7 +55,7 @@ public class Reserva {
     	return linhaCorrente.getSubtotal();
     }
     
-    public void setCliente(ClienteFinal cli) {
+    public void setCliente(Utilizador cli) {
         this.client = cli;
     }
 

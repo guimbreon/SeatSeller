@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Optional;
 
+
 import domain.api.IRegistarUtilizadorHandler;
 import domain.api.ISeatSeller;
 import domain.api.ISessao;

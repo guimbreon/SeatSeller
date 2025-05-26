@@ -38,7 +38,7 @@ public class CriarGrelhaHandler implements ICriarGrelhaHandler {
 
 	@Override
 	public void indicarTipoPadrao(String tip) throws DoesNotExistException {
-	    Optional<TipoDeLugar> tp = catTipos.getTipoLugar(tip);
+	    Optional<TipoDeLugar> tp = catTipos.getTipo(tip);
 	    
 	    if (tp.isEmpty()) {
 	        throw new DoesNotExistException("Tipo de lugar '" + tip + "' não existe.");
@@ -50,7 +50,7 @@ public class CriarGrelhaHandler implements ICriarGrelhaHandler {
 	@Override
 	public void indicarTipoLugar(int i, int j, String tip) throws DoesNotExistException {
 		boolean b = g.coordenadasValidas(i, j);
-		Optional<TipoDeLugar> tp = catTipos.getTipoLugar(tip);
+		Optional<TipoDeLugar> tp = catTipos.getTipo(tip);
 		
 		if (tp.isEmpty() || !b) {
 	        throw new DoesNotExistException("Tipo de lugar '" + tip + "' não existe.");

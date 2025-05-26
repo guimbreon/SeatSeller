@@ -69,6 +69,7 @@ public class Startup {
 		serv.getCriarTipoDeLugarHandler().criarTipoDeLugar("Lugar VIP", "Lugar com cadeira reclinavel", 10.00, false);
 		serv.getCriarTipoDeLugarHandler().criarTipoDeLugar("Lugar Love Seat", "Lugar sem divisória de um dos lados", 8.00, false);
 		serv.getCriarTipoDeLugarHandler().criarTipoDeLugar("Lugar Acessível", "Lugar adaptado a cadeiras de rodas", 2.00, false);
+
 		LOGGER.info("Tipos de lugares criados");
 	}
 	
@@ -90,9 +91,13 @@ public class Startup {
 		
 		if (!tipoDeLugarPadrao.isPresent()) {
 			try {
+				System.out.println("a");
 				cgh.indicarTipoPadrao("Lugar Normal");
+				System.out.println("b");
 				for(int i=0; i<10; i++) {
+					System.out.println("c");
 					cgh.indicarTipoLugar(5, i, "Lugar Acessível");
+					System.out.println("d");
 				}
 			} catch (DoesNotExistException e) {
 				LOGGER.log(Level.SEVERE, "Tipo de Lugar não existe", e);
