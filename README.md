@@ -2,6 +2,7 @@
 
 SeatSeller is a Java-based application designed to manage cinema seat reservations efficiently. It provides both graphical (JavaFX) and console interfaces, supporting different user roles and advanced session management features.
 
+Este README tambem está disponivel em [Português](README_PT.md)
 Project made by:
 [Guilherme Soares](https://github.com/guimbreon) && [Vitória Correia](https://github.com/vitoriateixeiracorreia)
 ## Features
