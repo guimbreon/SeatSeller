@@ -6,7 +6,7 @@ Este README tambem está disponivel em [Português](README_PT.md)
 
 Project made by:
 
-[Guilherme Soares](https://github.com/guimbreon) && [Vitória Correia](https://github.com/vitoriateixeiracorreia)
+[Guilherme Soares](https://github.com/gcsoares24) && [Vitória Correia](https://github.com/vitoriateixeiracorreia)
 ## Features
 
 - **User Roles & Authentication**
